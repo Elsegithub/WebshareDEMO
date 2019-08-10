@@ -6,3 +6,6 @@
 
 3. Mac 上传测试  
 
+4. Mac Pycharm First Upload  
+
+
