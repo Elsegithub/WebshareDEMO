@@ -20,3 +20,10 @@ class test(models.Model):
         verbose_name = '用户'
         verbose_name_plural = '用户'
 
+class textvue(models.Model):
+    title = models.CharField(max_length=128)
+    img = models.CharField(max_length=256)
+    lrrq = models.DateTimeField(auto_now_add=True)
+    txt = models.TextField()
+    def _str_(self):
+        return self.title

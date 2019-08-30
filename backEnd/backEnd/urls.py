@@ -22,5 +22,6 @@ urlpatterns = [
     path(r'test_list/', views.test_list),
     path('test_insert/', views.test_insert),
     path('test_delete/',views.test_delete),
-    path('test_update/', views.test_update)
+    path('test_update/', views.test_update),
+    path(r'search_geciList/', views.textVue)
 ]

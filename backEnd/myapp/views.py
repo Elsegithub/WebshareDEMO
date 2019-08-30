@@ -21,6 +21,14 @@ def Test(request):
 #             return obj.strftime("%Y-%m-%d")
 #         else:
 #             return json.JSONEncoder.default(self, obj)
+def textVue(request):
+    if request.method == "POST":
+        ret = models.textvue.objects.all().values()
+        print(list(ret))
+        result = {"geciList":list(ret)}
+        return JsonResponse(result,safe=False)
+    else:
+        print(request)
 
 def test_list(request):
     ret = models.test.objects.all().order_by("id").values()
