@@ -18,11 +18,28 @@ export const search_list = () => {
     })
 }
 
-export const search_geciList = () => {
+export const search_geciList = postData => {
     return axios.request({
         method: 'post',
         params:{},
         url: '/api/search_geciList/',
-        data: {}
+        data: qs.stringify(postData)
+    })
+}
+export const registerdo = postData => {
+    return axios.request({
+        method: 'post',
+        params:{},
+        url: '/api/registerdo/',
+        data: qs.stringify(postData)
+    })
+}
+
+export const logindo = postData => {
+    return axios.request({
+        method: 'post',
+        params:{},
+        url: '/api/logindo/',
+        data: qs.stringify(postData)
     })
 }

@@ -64,9 +64,23 @@
         right: 10px;
         top: 5px;
     }
+    .wz_login{
+        text-align: center;
+        margin-top: 20px;
+    }
 </style>
 <template>
     <div class="layout">
+        <Drawer title="MAGIC" width="500" :closable="false" v-model="value5">
+            <!-- <Button @click="value6 = true" type="primary">Two-level Drawer</Button> -->
+            <login class="wz_login" :login-do = logindo @childFn = "loginMsg"></login>
+        </Drawer>
+        <Drawer title="Login" width="380" :closable="false" v-model="value6">
+            <loginmain @childFn = "logindoMsg"></loginmain>
+        </Drawer>
+        <Drawer title="Register" width="380" :closable="false" v-model="value7">
+            <register   @childFn = "cancleRe"></register>
+        </Drawer>
         <!-- <div class="layout-ceiling">
             <div class="layout-ceiling-main">
                 <a href="/#/hello">注册登录</a> |
@@ -87,7 +101,7 @@
                     </MenuItem>
                     <MenuItem name="2">
                         <Icon type="ios-musical-notes-outline" />
-                        Item 2
+                        灰烬
                     </MenuItem>
                     <MenuItem name="3">
                         <Icon type="ios-musical-notes-outline" />
@@ -95,7 +109,7 @@
                     </MenuItem>
                     <MenuItem name="4">
                         <Icon type="ios-musical-notes-outline" />
-                        Item 4
+                        信息
                     </MenuItem>
                 </div>
             </Menu>
@@ -116,8 +130,11 @@
 <script>
     import cardtest from '@/components/card1'
     import cardtest2 from '@/components/card2'
+    import login from '@/components/loginorregister'
+    import loginmain from '@/components/login'
+    import register from '@/components/register'
     export default {
-        components: {cardtest,cardtest2},
+        components: {cardtest,cardtest2,login,loginmain,register},
         data() {
             return{
                 choosePage: "cardtest",
@@ -126,10 +143,37 @@
                     titile: '',
                     msg: '',
                     txt: ''
-                }
+                },
+                logindo: {
+                    login: false,
+                    register: false,
+                    logout: true,
+                    user: ''
+                },
+                 value5: false,
+                value6: false,
+                value7: false
             }
         },
         methods: {
+            logindoMsg(logindoMsg){
+                console.log(logindoMsg);
+                this.logindo = logindoMsg;
+                this.value6 = false;
+            },
+            cancleRe(msg){
+                console.log(msg);
+                this.value7 = msg.value7;
+                this.value6 = msg.value6;
+            },
+            loginMsg(loginMsg){
+                console.log(loginMsg);
+                if(loginMsg == "Login"){
+                    this.value6 = true;
+                }else{
+                    this.value7 = true;
+                }
+            },
             changePage(pagemsg){
                 console.log(pagemsg);
                 this.choosePage = pagemsg.page;
@@ -139,9 +183,19 @@
                 console.log(name);
                 if(name == "1"){
                     this.choosePage = "cardtest";
+                }else if(name == "4"){
+                    this.value5 = true;
+                }else if(name == "2"){
+                    let txt = sessionStorage.getItem("name");
+                    if(txt == null){
+                        this.$Message.error("no login");      
+                    }else{
+                        console.log(txt);
+                    }
                 }else{
                     console.log(name);
                 }
+                
             }
         }
     }

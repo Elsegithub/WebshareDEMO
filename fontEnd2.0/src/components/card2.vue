@@ -14,6 +14,7 @@
                 {{sendPage.msg}}
             </a>
             <p class="text-wrapper">{{sendPage.txt}}</p>
+            <img class="imgtest" src="/upload/upload/do.jpg"/>
         </Card>
     </Card>
 </template>
@@ -34,5 +35,9 @@ export default {
 <style scoped>
     .text-wrapper{
         white-space: pre-wrap;
+    }
+    .imgtest{
+        width: 100%;
+        height: auto;
     }
 </style>

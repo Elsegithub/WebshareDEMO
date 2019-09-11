@@ -26,6 +26,8 @@
                 </div>
             </ul>
         </Card>
+        <Page show-elevator :total="dataCount" :page-size="pageSize" :current="pageCurrent"
+            @on-change="change" @on-page-size-change="_nowPageSize" show-total show-sizer show-elevator></Page>
     </div>
 </template>
 
@@ -40,17 +42,42 @@ export default {
         changePage(pagemsg){
             this.$emit('changePage',pagemsg);
             console.log(this.pages)
+        },
+        change(index){
+            console.log(index);
+            this.pageCurrent = index;
+            this._getData();
+        },
+        _nowPageSize(index) {
+            console.log(index);
+            this.pageSize = index;
+            this._getData();
+        },
+        _getData(){
+            let postData = {
+                'pageCurrent': this.pageCurrent,
+                'pageSize' : this.pageSize
+            }
+            search_geciList(postData).then(res => {
+                console.log(res.data.geciList);
+                this.dataCount = res.data.dataCount;
+                this.itemList = res.data.geciList;
+            })
         }
     },
     data() {
         return {
             itemList: [],
-            pages: ''
+            pages: '',
+            dataCount: 0,
+            pageSize: 10,
+            pageCurrent: 1
         }
     },
     mounted() {
         search_geciList().then(res => {
             console.log(res.data.geciList);
+            this.dataCount = res.data.dataCount;
             this.itemList = res.data.geciList;
         })
     }
